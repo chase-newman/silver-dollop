@@ -13,31 +13,47 @@ input.addEventListener("keydown", (e) => {
    console.log(e.code);
 });
 
-// window.addEventListener("keydown", function(e) {
-//   console.log(e.key);
-//   console.log(e.code);
-// });
+fetch("https://data.sec.gov/submissions/CIK0000320193.json")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.filings.recent.form[0]);
+        const secFiling = data.filings.recent.form[0];
+        if(secFiling === "4") {
+            document.querySelector("#filing").innerHTML = "Form 4";
+        }
+    });
 
-// fetch("https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json")
-//     .then(response => {
-//         console.log(response);
-//     })
+
+fetch("https://test-project-d14cc-default-rtdb.firebaseio.com/users.json")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        console.log(data.website);
+        const linkSource = data.website;
+        console.log(linkSource, anchorTag.href);
+        anchorTag.href = linkSource
+    });
     
-// fetch("https://data.sec.gov/submissions/CIK0000320193.json")
-//     .then(response => {
-//       console.log(response) 
-//     });
-
-
-
-// fetch("https://test-project-d14cc-default-rtdb.firebaseio.com/users.json")
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log(data.website);
-//         const linkSource = data.website;
-//         console.log(linkSource, anchorTag.href);
-//         anchorTag.href = linkSource
-//     });
+fetch("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&apikey=1D24JWD6HONH93GD")
+    .then(response => response.json())
+    .then(data => {
+      const dataOne = Object.values(data)[1]
+      const dataTwo = Object.values(dataOne)
+      const dataThree = dataTwo[99];
+      const dataFour = Object.values(dataThree)[2];
+      console.log(dataFour);
+      document.querySelector("span").innerHTML = dataFour;
+      if(dataFour !== null) {
+          fetch("https://test-project-d14cc-default-rtdb.firebaseio.com/users.json", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(dataFour),
+          });
+      }
+    });
+    
     
     
     
