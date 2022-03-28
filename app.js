@@ -77,7 +77,17 @@ fetch("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&
   const config = {
     type: 'line',
     data: data,
-    options: {}
+    options: {
+        animations: {
+            tension: {
+                duration: 1000,
+                easing: 'linear',
+                from: 1,
+                to: 0,
+                loop: false
+            }
+        }
+    }
   };
   
   const myChart = new Chart(

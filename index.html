@@ -10,21 +10,27 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1>Date: 3/25/2022</h1>
+                    <h1>Date: 3/28/2022</h1>
                     <h1>Apple Stock Price: <span></span></h1>
                     <h2>Most Recent SEC Filing: <span id="filing"></span></h2>                    
                 </div>
             </div>
             <div class="row">
-                <div class="col">
-                    <button class="btn btn-primary">Click Me</button>
-                    <a href="https://www.google.com" target="_blank">Link to MarketWatch</a>
-                    <input type="text" class="form-control"/>                    
-                </div>  
+                <div class="col-6">
+                    <form action="submit" method="get" accept-charset="utf-8">
+                        <input type="text" class="form-control"/>     
+                        <button class="btn btn-primary">Click Me</button>
+                    </form>
+                </div>
+                <div class="col-4">
+                
+                </div>
             </div>
         </div>
-        <div>
-          <canvas id="myChart"></canvas>
+        <div class="row">
+            <div class="col-6">
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
 
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>-->
