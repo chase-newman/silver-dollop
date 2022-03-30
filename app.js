@@ -1,82 +1,39 @@
-const btn = document.querySelector("button");
-const anchorTag = document.querySelector("a");
-const input = document.querySelector("input");
+let dataSet = [];
 
-
-btn.addEventListener("click",(event) => {
-    console.log(event);
-    console.log("Button Clicked");
-});
-
-input.addEventListener("keydown", (e) => {
-   console.log(e.key);
-   console.log(e.code);
-});
-
-fetch("https://data.sec.gov/submissions/CIK0000320193.json")
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.filings.recent.form[0]);
-        const secFiling = data.filings.recent.form[0];
-        if(secFiling === "4") {
-            document.querySelector("#filing").innerHTML = "Form 4";
-        }
-    });
-
-
-fetch("https://test-project-d14cc-default-rtdb.firebaseio.com/users.json")
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        console.log(data.website);
-        const linkSource = data.website;
-        console.log(linkSource, anchorTag.href);
-        anchorTag.href = linkSource
-    });
-    
 fetch("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&apikey=1D24JWD6HONH93GD")
     .then(response => response.json())
     .then(data => {
-      const dataOne = Object.values(data)[1]
-      const dataTwo = Object.values(dataOne)
-      const dataThree = dataTwo[99];
-      const dataFour = Object.values(dataThree)[2];
-      console.log(dataFour);
-      document.querySelector("span").innerHTML = dataFour;
-      if(dataFour !== null) {
-          fetch("https://test-project-d14cc-default-rtdb.firebaseio.com/users.json", {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              body: JSON.stringify(dataFour),
-          });
-      }
-    });
-    
-    
- const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-  ];
+        const stockPriceObject = Object.values(data)[1];
+        let stockPriceArr = Object.values(stockPriceObject);
+        console.log(stockPriceArr);
 
-  const data = {
+        const todaysStockPriceValues = stockPriceArr[0];
+        const closingStockPrice = parseFloat(Object.values(todaysStockPriceValues)[3]);
+        // console.log(dataFour.toFixed(2));
+        document.querySelector("span").innerHTML = closingStockPrice;
+        for(let i=0; i<30; i++) {
+            console.log(parseFloat(Object.values(stockPriceArr[i])[3]));
+            dataSet.push(parseFloat(Object.values(stockPriceArr[i])[3]));
+            console.log(dataSet);
+        }
+         
+  const labels = [29,28,27,26,25,24,23,22,21,20,
+                19,18,17,16,15,14,13,12,10,9,8,
+                7,6,5,4,3,2,1,0];
+
+  const dataY = {
     labels: labels,
     datasets: [{
-      label: 'My First dataset',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: [0, 10, 5, 2, 20, 30, 45],
+      label: "Stock Price ($USD)",
+      backgroundColor: 'rgb(2, 252, 135)',
+      borderColor: 'rgb(2, 252, 135)',
+      data: dataSet,
+      fill: true
     }]
   };
-
   const config = {
     type: 'line',
-    data: data,
+    data: dataY,
     options: {
         animations: {
             tension: {
@@ -89,26 +46,16 @@ fetch("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&
         }
     }
   };
-  
   const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
+        document.getElementById('myChart'),
+        config
+    ); 
+});
     
-    
-// const data = { username: 'example' };
 
-// fetch('https://test-project-d14cc-default-rtdb.firebaseio.com/users.json', {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify(data),
-// })
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log('Success:', data);
-//     })
-//     .catch((error) => {
-//       console.error('Error:', error);
-//     });
+
+    
+
+
+
+
