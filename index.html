@@ -13,17 +13,22 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <h1>Apple Stock Price: $<span></span></h1>
+                    <h1><span class="stockName"></span> Stock Price: $<span id="price"></span></h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <p>Apple (NASDAQ: AAPL) stock price for the past 30 days</p>
+                    <p><span class="stockName"></span> stock price for the past 30 days</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-success">Switch Stock</button>
                 </div>
             </div>
         </div>
