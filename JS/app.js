@@ -1,9 +1,9 @@
 //Declare stock variables and select button elements
-const appleStock = {name: "Apple", ticker: "AAPL", color: "rgb(255, 202, 44)"};
-const amazonStock = {name: "Amazon", ticker: "AMZN", color: "rgb(2, 135, 90)"};
-const netflixStock = {name: "Netflix", ticker: "NFLX", color: "rgb(255, 0, 0)"};
-const metaStock = {name: "Meta", ticker: "FB", color: "rgb(11, 94, 215)"};
-const googleStock = {name: "Google", ticker: "GOOG", color: "rgb(92, 99, 106)"};
+const appleStock = {name: "Apple", ticker: "AAPL", color: "rgba(255, 202, 44, 0.70)"};
+const amazonStock = {name: "Amazon", ticker: "AMZN", color: "rgba(2, 135, 90, 0.70)"};
+const netflixStock = {name: "Netflix", ticker: "NFLX", color: "rgba(255, 0, 0, 0.70)"};
+const metaStock = {name: "Meta", ticker: "FB", color: "rgba(11, 94, 215, 0.70)"};
+const googleStock = {name: "Google", ticker: "GOOG", color: "rgba(92, 99, 106, 0.70)"};
     
 const appleBtn = document.querySelector("#apple-btn");
 const amznBtn = document.querySelector("#amazon-btn");
@@ -29,7 +29,7 @@ const getStockData = (stock) => {
         let stockPriceArr = Object.values(stockPriceObject);
         const todaysStockPriceValues = stockPriceArr[0];
         const closingStockPrice = parseFloat(Object.values(todaysStockPriceValues)[3]);
-        document.querySelector("#price").innerHTML = closingStockPrice;
+        document.querySelector("#price").innerHTML = `$${closingStockPrice}`;
         const stockNameElements = document.querySelectorAll(".stockName");
         for(let el of stockNameElements) {
             el.innerHTML = stock.name;
@@ -70,7 +70,8 @@ const getStockData = (stock) => {
         );  
     }
 }).catch((e) => {
-       console.log(e); 
+       console.log(e);
+       alert("Sorry, looks like there was an error getting that data. Please wait a second and try again.")
     });
 };
 
